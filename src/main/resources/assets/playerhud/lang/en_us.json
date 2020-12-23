@@ -1,0 +1,18 @@
+{
+    "item.playerhud.weirdmob_egg": "Monster egg for a weird mob",
+    "block.playerhud.firstblock": "First Block",
+
+    "_comment": "Creative Tabs",
+    "itemGroup.playerhud": "Tutorial",
+
+    "message.playerhud.command.test": "Hello world!",
+    "message.firstblock": "This is the first block of this mod. It is directional and has an inventory. It can also generate power at about %s per tick",
+    "message.complex_multipart": "This is an example of a complex multipart model",
+    "message.increase_charge": "Mob has been charged to %s",
+    "message.updated_mana": "Player has %s renaming mana",
+    "message.pickup_item": "Item has been picked up %s",
+
+    "screen.playerhud.firstblock": "FirstBlock Screen",
+    "screen.playerhud.spawn": "Spawn something",
+    "screen.playerhud.player_hud": "Testington"
+}
