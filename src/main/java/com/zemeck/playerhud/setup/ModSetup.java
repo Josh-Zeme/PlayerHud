@@ -1,8 +1,8 @@
 package com.zemeck.playerhud.setup;
 
 import com.zemeck.playerhud.PlayerHud;
-import com.zemeck.playerhud.capabilities.Player.Mana.CapabilityEntityMana;
-import com.zemeck.playerhud.capabilities.Player.Mana.ManaEventHandler;
+import com.zemeck.playerhud.capabilities.Player.CapabilityEntityPlayerStats;
+import com.zemeck.playerhud.capabilities.Player.PlayerStatsEventHandler;
 import com.zemeck.playerhud.commands.ModCommands;
 import com.zemeck.playerhud.network.Networking;
 import net.minecraft.item.ItemGroup;
@@ -25,14 +25,16 @@ public class ModSetup {
 
     public static void init(final FMLCommonSetupEvent event) {
         Networking.registerMessages();
-        CapabilityEntityMana.register();
+        CapabilityEntityPlayerStats.register();
 
-        MinecraftForge.EVENT_BUS.addListener(ManaEventHandler::onAttachCapabilitiesEvent);
-        MinecraftForge.EVENT_BUS.addListener(ManaEventHandler::onAttackEvent);
-        MinecraftForge.EVENT_BUS.addListener(ManaEventHandler::renderGameOverlay);
-        MinecraftForge.EVENT_BUS.addListener(ManaEventHandler::preventGameOverlay);
-        MinecraftForge.EVENT_BUS.addListener(ManaEventHandler::midGameOverlay);
-        MinecraftForge.EVENT_BUS.addListener(ManaEventHandler::onPlayerTracking);
+        MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::serverLoginEvent);
+        MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::onAttachCapabilitiesEvent);
+        MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::onAttackEvent);
+        MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::renderGameOverlay);
+        MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::preventGameOverlay);
+        MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::midGameOverlay);
+        MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::playerClone);
+
     }
 
     @SubscribeEvent

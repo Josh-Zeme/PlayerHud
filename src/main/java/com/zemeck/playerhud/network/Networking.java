@@ -1,7 +1,7 @@
 package com.zemeck.playerhud.network;
 
 import com.zemeck.playerhud.PlayerHud;
-import com.zemeck.playerhud.capabilities.Player.Mana.ManaStateSyncMessage;
+import com.zemeck.playerhud.capabilities.Player.PlayerStatsStateSyncMessage;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
@@ -23,10 +23,10 @@ public class Networking {
                 s -> true,
                 s -> true);
 
-       INSTANCE.messageBuilder(ManaStateSyncMessage.class,nextID())
-                .encoder(ManaStateSyncMessage::encode)
-                .decoder(ManaStateSyncMessage::new)
-                .consumer(ManaStateSyncMessage::handle)
+       INSTANCE.messageBuilder(PlayerStatsStateSyncMessage.class,nextID())
+                .encoder(PlayerStatsStateSyncMessage::encode)
+                .decoder(PlayerStatsStateSyncMessage::new)
+                .consumer(PlayerStatsStateSyncMessage::handle)
                 .add();
     }
 
