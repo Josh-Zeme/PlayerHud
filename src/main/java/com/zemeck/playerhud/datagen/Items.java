@@ -4,7 +4,7 @@ import com.zemeck.playerhud.PlayerHud;
 import com.zemeck.playerhud.setup.Registration;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.ExistingFileHelper;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 
 public class Items extends ItemModelProvider {

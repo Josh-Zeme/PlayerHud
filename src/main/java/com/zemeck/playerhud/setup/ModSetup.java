@@ -5,9 +5,13 @@ import com.zemeck.playerhud.capabilities.Player.CapabilityEntityPlayerStats;
 import com.zemeck.playerhud.capabilities.Player.PlayerStatsEventHandler;
 import com.zemeck.playerhud.commands.ModCommands;
 import com.zemeck.playerhud.network.Networking;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -28,7 +32,7 @@ public class ModSetup {
         CapabilityEntityPlayerStats.register();
 
         MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::serverLoginEvent);
-        MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::onAttachCapabilitiesEvent);
+        MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, PlayerStatsEventHandler::onAttachCapabilitiesEvent);
         MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::onAttackEvent);
         MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::renderGameOverlay);
         MinecraftForge.EVENT_BUS.addListener(PlayerStatsEventHandler::preventGameOverlay);
@@ -38,8 +42,9 @@ public class ModSetup {
     }
 
     @SubscribeEvent
-    public static void serverLoad(FMLServerStartingEvent event) {
-        ModCommands.register(event.getCommandDispatcher());
-    }
+    public void onCommandsRegister(RegisterCommandsEvent event)
+    {
+        ModCommands.register(event.getDispatcher());
 
+    }
 }

@@ -13,6 +13,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.AbstractSpawner;
 import net.minecraftforge.common.util.Constants;
 
@@ -31,10 +32,11 @@ public class WeirdMobEggItem extends Item {
      */
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        if (world.isRemote) {
+        World currentWorld = context.getWorld();
+        if (currentWorld.isRemote) {
             return ActionResultType.SUCCESS;
         } else {
+            ServerWorld world = (ServerWorld) context.getWorld();
             ItemStack itemstack = context.getItem();
             BlockPos blockpos = context.getPos();
             Direction direction = context.getFace();

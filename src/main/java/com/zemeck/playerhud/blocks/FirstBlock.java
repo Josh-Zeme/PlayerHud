@@ -28,6 +28,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 public class FirstBlock extends Block {
 
@@ -35,7 +36,7 @@ public class FirstBlock extends Block {
         super(Properties.create(Material.IRON)
                 .sound(SoundType.METAL)
                 .hardnessAndResistance(2.0f)
-                .lightValue(14)
+                .setLightLevel(value -> 14)
         );
     }
 
@@ -45,8 +46,8 @@ public class FirstBlock extends Block {
     }
 
     @Override
-    public int getLightValue(BlockState state) {
-        return state.get(BlockStateProperties.POWERED) ? super.getLightValue(state) : 0;
+    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+        return state.get(BlockStateProperties.POWERED) ? state.getLightValue() : 0;
     }
 
     @Override

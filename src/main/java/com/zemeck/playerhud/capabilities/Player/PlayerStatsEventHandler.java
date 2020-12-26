@@ -1,5 +1,6 @@
 package com.zemeck.playerhud.capabilities.Player;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.zemeck.playerhud.PlayerHud;
 import com.zemeck.playerhud.network.Networking;
 import net.minecraft.client.Minecraft;
@@ -30,14 +31,14 @@ public class PlayerStatsEventHandler {
 
                 Minecraft mc = Minecraft.getInstance();
                 PlayerEntity player = mc.player;
-
+                MatrixStack matrix = event.getMatrixStack();
                 player.getCapability(CapabilityEntityPlayerStats.ENTITY_PLAYER_STATS_CAPABILITY).ifPresent(h -> {
                     String textureToUse = "player_hud";
                     Minecraft.getInstance().textureManager.bindTexture(new ResourceLocation("playerhud", "textures/gui/" + textureToUse + ".png"));
-                    AbstractGui.blit(0,0,0.F, 0.F, 180, 67, 180, 128);
-                    mc.fontRenderer.drawString(h.getProfession() + ": " + player.getDisplayName().getString(), 47, 4, 0x000000);
-                    mc.fontRenderer.drawString("HP: " + Math.round(player.getHealth()) +" / " +  Math.round(player.getMaxHealth()), 47, 14, 0x000000);
-                    mc.fontRenderer.drawString("MP: " +(int) h.getMana() + " / " +  Math.round(h.getMaxMana()), 47, 23, 0x000000);
+                    AbstractGui.blit(matrix,0,0,0.F, 0.F, 180, 67, 180, 128);
+                    mc.fontRenderer.drawString(matrix,h.getProfession() + ": " + player.getDisplayName().getString(), 47, 4, 0x000000);
+                    mc.fontRenderer.drawString(matrix,"HP: " + Math.round(player.getHealth()) +" / " +  Math.round(player.getMaxHealth()), 47, 14, 0x000000);
+                    mc.fontRenderer.drawString(matrix,"MP: " +(int) h.getMana() + " / " +  Math.round(h.getMaxMana()), 47, 23, 0x000000);
                 });
             }
         }
